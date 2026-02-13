@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'includes/admin/head-admin.html' %}
+  <link id="pagestyle" href="{{ url_for('static', filename='admin/assets/css/styles.css')}}" rel="stylesheet" />
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
+    {% include 'includes/admin/aside-admin.html' %}
+  </aside>
+
+  <div class="main-content position-relative max-height-vh-100 h-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      {% include 'includes/admin/nav-admin.html' %}
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid px-2 px-md-4">
+      <div class="page-header admin min-height-300 border-radius-xl mt-4">
+        <span class="mask  bg-gradient-dark  opacity-6"></span>
+      </div>
+      <div class="card card-body mx-2 mx-md-2 mt-n6">
+
+        <div class="row gx-4 mb-2">
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                    <li class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 active"
+                        data-bs-toggle="modal"
+                        data-bs-target="#addAdminModal"
+                        role="button">
+                        <i translate="no" class="material-symbols-rounded text-lg position-relative">group</i>
+                        <span class="ms-1">Add Administrator</span>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ADD ADMIN MODAL -->
+            <div class="modal fade" id="addAdminModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+
+                    <!-- HEADER -->
+                    <div class="modal-header bg-gradient-dark">
+                        <h5 class="modal-title text-white">
+                        Add New Administrator
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="modal-body">
+                        <form id="addAdminForm" action="/admin/add-administrator" method="POST">
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <label class="form-label">Name</label>
+                              <input type="text" name="name" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter full name" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                              <label class="form-label">Email Address</label>
+                              <input type="email" name="email" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter email address" required>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                              <label class="form-label">Sale Point</label>
+                              <input type="text" name="sale_point" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter sale point" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                              <label class="form-label">Phone Number</label>
+                              <input type="tel" name="phone_number" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter phone number" required>
+                            </div>
+                          </div>
+
+                          <button type="submit" class="btn bg-gradient-success">Add Administrator</button>
+                        </form>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="row">
+
+            <div class="col-12 mt-4">
+              <div class="mb-5 ps-3">
+                <h6 class="mb-1">Administrator Management</h6>
+                <p class="text-sm">You can view, create, delete and edit an administrator</p>
+              </div>
+              <div class="row">
+                {% for admin in administrators %}
+                  <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                      <div class="card-header p-0 m-2">
+                        <a class="d-block shadow-xl border-radius-xl">
+                          <img src="{{ url_for('static', filename='home/assets/img/logos/hero-2.jpg')}}" 
+                              alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                        </a>
+                      </div>
+                      <div class="card-body p-3">
+                        <p class="mb-0 text-sm">Sale Point {{ admin.sale_point }}</p>
+                        <a href="javascript:;">
+                          <h5>{{ admin.name }}</h5>
+                        </a>
+                        <p class="mb-4 text-sm">
+                          With a daily average sales of {{ admin.daily_avg }} {{ company.currency }}.<br>
+                          His login password is {{ admin.password }}
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between">
+                          <button type="button" class="btn btn-outline-primary btn-sm mb-0"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#editAdminModal{{ admin.id }}"
+                                  role="button">Edit
+                          </button>
+                          <button type="button"
+                                  class="btn btn-outline-danger btn-sm mb-0"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#deleteAdminModal{{ admin.id }}">Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- EDIT ADMIN MODAL -->
+                  <div class="modal fade" id="editAdminModal{{ admin.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark">
+                          <h5 class="modal-title text-white">Edit Administrator</h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body">
+                          <form action="{{ url_for('admin_blueprint.edit_administrator') }}" method="POST">
+                            <input type="hidden" name="admin_id" value="{{ admin.id }}">
+
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" name="name" class="form-control form-control-lg rounded-3 shadow-sm" value="{{ admin.name }}" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" name="email" class="form-control form-control-lg rounded-3 shadow-sm" value="{{ admin.email }}" required>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label">Number Phone</label>
+                                <input type="tel" name="phone_number" class="form-control form-control-lg rounded-3 shadow-sm" value="+243000000000" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label">Sale Point</label>
+                                <input type="text" name="sale_point" class="form-control form-control-lg rounded-3 shadow-sm" value="{{ admin.sale_point }}" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn bg-gradient-success">Update Administrator</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- DELETE ADMIN MODAL -->
+                  <div class="modal fade" id="deleteAdminModal{{ admin.id }}" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+
+                        <div class="modal-header bg-gradient-danger">
+                          <h5 class="modal-title text-white">Confirm Deletion</h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                          <p class="text-sm">
+                            Are you sure you want to permanently remove
+                            <strong>{{ admin.name }}</strong> from this company?
+                          </p>
+                          <p class="text-danger text-sm mb-0">
+                            This action cannot be undone.
+                          </p>
+                        </div>
+
+                        <div class="modal-footer">
+                          <button type="button"
+                                  class="btn btn-outline-secondary"
+                                  data-bs-dismiss="modal">
+                            Cancel
+                          </button>
+
+                          <form action="{{ url_for('admin_blueprint.delete_administrator') }}" method="POST">
+                            <input type="hidden" name="admin_id" value="{{ admin.id }}">
+                            <button type="submit" class="btn bg-gradient-danger">
+                              Delete
+                            </button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer py-4  ">
+      {% include 'includes/admin/footer-admin.html' %}
+    </footer>
+
+  </div>
+
+  <!--   Core JS Files   -->
+  {% include 'includes/admin/script-admin.html' %}
+  
+</body>
+
+</html>

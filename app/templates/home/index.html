@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
+    <title>Fluxa | Home</title>
+
+    <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+    <link rel="manifest" href="{{ url_for('static', filename='home/assets/img/favicons/manifest.json')}}">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='home/assets/img/favicons/mstile-150x150.png')}}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='home/vendors/swiper/swiper-bundle.min.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&amp;family=Rubik:ital,wght@0,300..900;1,300..900family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='home/assets/css/theme.min.css')}}" rel="stylesheet" id="style-default">
+    <link href="{{ url_for('static', filename='home/assets/css/user-rtl.min.css')}}" rel="stylesheet" id="user-style-rtl">
+    <link href="{{ url_for('static', filename='home/assets/css/user.min.css')}}" rel="stylesheet" id="user-style-default">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  </head>
+
+  <body>
+    <!-- ===============================================--><!--    Main Content--><!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="content">
+        <nav class="navbar navbar-expand-md fixed-top" id="navbar" data-navbar-soft-on-scroll="data-navbar-soft-on-scroll">
+          <div class="container-fluid px-0">
+            <a href="/">
+              <img class="navbar-brand d-md-none" src="{{ url_for('static', filename='home/assets/img/logos/logo-w.png')}}" alt="logo" width="40px"/>
+            </a>
+            <a class="navbar-brand fw-bold d-none d-md-block" href="/">Fluxa.</a><a class="btn btn-primary btn-sm ms-md-x1 mt-lg-0 order-md-1 ms-auto" href="{{ user_dashboard_url }}">Get Started Now </a>
+            <button class="navbar-toggler border-0 pe-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-md-end" id="navbar-content" data-navbar-collapse="data-navbar-collapse">
+              <ul class="navbar-nav gap-md-2 gap-lg-3 pt-x1 pb-1 pt-md-0 pb-md-0" data-navbar-nav="data-navbar-nav">
+                <li class="nav-item"> <a class="nav-link lh-xl" href="#home">Home</a></li>
+                <li class="nav-item"> <a class="nav-link lh-xl" href="#about">About us</a></li>
+                <li class="nav-item"> <a class="nav-link lh-xl" href="#service">Support</a></li>
+                <li class="nav-item"> <a class="nav-link lh-xl" href="#pricing">Pricing</a></li>
+                <li class="nav-item"> <a class="nav-link lh-xl" href="#contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <div data-bs-target="#navbar" data-bs-spy="scroll" tabindex="0">
+
+          <section class="hero-section overflow-hidden position-relative z-0 mb-4 mb-lg-0" id="home">
+            <div class="hero-background">
+              <div class="container">
+                <div class="row gy-4 gy-md-8 pt-9 pt-lg-0">
+                  <div class="col-lg-6 text-center text-lg-start">
+                    <h1 class="fs-2 fs-lg-1 text-white fw-bold mb-2 mb-lg-x1 lh-base mt-3 mt-lg-0"> Track your <span class="text-nowrap">financial flows</span></h1>
+                    <p class="fs-8 text-white mb-3 mb-lg-4 lh-lg">Fluxa helps businesses track income, expenses, and stock in real time, all from a single dashboard.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start"><a class="btn btn-primary btn-lg lh-xl mb-4 mb-md-5 mb-lg-7" href="{{ user_dashboard_url }}">Get started</a></div>
+                  </div>
+                  <div class="col-lg-6 position-lg-relative">
+                    <div class="position-lg-absolute z-1 text-center"><img class="img-fluid chat-image" src="{{ url_for('static', filename='home/assets/img/Hero/Frame.png')}}" alt="" />
+                      <div class="position-absolute dots d-none d-md-block"> <img class="img-fluid w-50 w-lg-75" src="{{ url_for('static', filename='home/assets/img/illustrations/Dots.webp')}}" alt="" /></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="position-absolute bottom-0 start-0 end-0 z-1"><img class="wave mb-md-n2" src="{{ url_for('static', filename='home/assets/img/illustrations/Wave.svg')}}" alt="" />
+              <div class="bg-white py-2 py-md-5"></div>
+            </div>
+          </section>
+
+          <section class="container border-bottom mb-8 mb-lg-10">
+            <div class="row pb-6 pb-lg-8 g-3 g-lg-8 px-3">
+
+              <div class="col-12 col-md-4">
+                <h2 id="total-companies" class="fs-3 fw-bold lh-sm mb-2 text-center"
+                    data-countup='{"endValue":{{ total_companies }}}'>0</h2>
+                <h6 class="fs-8 fw-normal lh-lg mb-0 opacity-70 text-center">
+                  Businesses using Fluxa
+                </h6>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <h2 id="total-finance" class="fs-3 fw-bold lh-sm mb-2 text-center"
+                    data-countup='{"endValue":{{ total_finance }}}'>0</h2>
+                <h6 class="opacity-70 fs-8 fw-normal lh-lg mb-0 text-center">
+                  Transactions tracked
+                </h6>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <h2 class="fs-3 fw-bold lh-sm mb-2 text-center"
+                    data-countup='{"endValue":24,"suffix":"/7"}'>0</h2>
+                <h6 class="opacity-70 fs-8 fw-normal lh-lg mb-0 text-center">
+                  Real-time monitoring
+                </h6>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="container mb-8 mb-lg-13" id="about">
+            <div class="row align-items-center">
+              <div class="col-12 col-lg-6 col-xl-7"><img class="img-fluid" src="{{ url_for('static', filename='home/assets/img/Hero/Team.png')}}" alt="" /></div>
+              <div class="col-12 col-lg-6 col-xl-5">
+                <div class="row justify-content-center justify-content-lg-start">
+                  <div class="col-sm-10 col-md-8 col-lg-12">
+                    <h2 class="fs-4 fs-lg-3 fw-bold mb-2 text-center text-lg-start">
+                      Take control of your business
+                    </h2>
+                  </div>
+
+                  <div class="col-12">
+
+                    <div class="mb-x1 mb-lg-3">
+                      <p class="lh-xl mb-0">Income Tracking</p>
+                    </div>
+
+                    <div class="mb-x1 mb-lg-3">
+                      <p class="lh-xl mb-0">Expense Management</p>
+                    </div>
+
+                    <div class="mb-x1 mb-lg-3">
+                      <p class="lh-xl mb-0">Stock & Inventory</p>
+                    </div>
+
+                    <div class="mb-x1 mb-lg-3">
+                      <p class="lh-xl mb-0">Reports & Insights</p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="container mb-8 mb-lg-13">
+            <div class="row align-items-center">
+              <div class="col-12 col-lg-6 col-xl-5 order-lg-1"><img class="img-fluid" src="{{ url_for('static', filename='home/assets/img/Hero/Collaborator.png')}}" alt="" /></div>
+              <div class="col-12 col-lg-6 col-xl-7">
+                <div class="row justify-content-center justify-content-lg-start">
+                  <div class="col-sm-10 col-md-8 col-lg-11">
+                    <h2 class="fs-4 fs-lg-3 fw-bold mb-2 text-center text-lg-start">
+                      Manage your business efficiently
+                    </h2>
+                    <p class="fs-8 mb-4 mb-lg-5 lh-lg text-center text-lg-start fw-normal">
+                      Keep track of income, expenses, and inventory in one place, and make better decisions fast.
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <div class="mb-x1 mb-lg-3">
+                      <h5 class="fs-8 fw-bold lh-lg mb-1">Track Income & Payments</h5>
+                      <p class="mb-0 lh-xl">
+                        Record all your incoming cash flows and payment sources easily.
+                      </p>
+                    </div>
+                    <div class="mb-x1 mb-lg-3">
+                      <h5 class="fs-8 fw-bold lh-lg mb-1">Manage Expenses</h5>
+                      <p class="lh-xl mb-0">
+                        Monitor outgoing payments to avoid overspending and maintain healthy finances.
+                      </p>
+                    </div>
+                    <div>
+                      <h5 class="fs-8 fw-bold lh-lg mb-1">Inventory & Stock</h5>
+                      <p class="lh-xl mb-0">
+                        Keep track of your products and materials, ensuring nothing goes missing or overstocked.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="container mb-8 mb-lg-11">
+            <div class="row justify-content-center">
+              <div class="col-md-8 col-lg-7">
+                <h3 class="fs-4 fs-lg-3 fw-bold text-center mb-2 mb-lg-x1">
+                  How to <span class="text-nowrap">create your dashboard</span>
+                </h3>
+                <p class="fs-8 mb-7 mb-lg-8 text-center lh-lg">
+                  Follow these simple steps to set up your Fluxa dashboard and start tracking your business flows in minutes.
+                </p>
+              </div>
+
+              <div class="col-12">
+                <div class="row g-sm-2 g-lg-3 align-items-center timeline">
+
+                  <!-- Step 1 -->
+                  <div class="col-12 col-lg-4 d-flex flex-row flex-lg-column justify-content-center gap-2 gap-sm-x1 gap-md-4 gap-lg-0">
+                    <div class="timeline-step-1 w-25 w-lg-100 mb-4 mb-lg-5 mb-xl-6">
+                      <div class="timeline-item d-flex justify-content-center">
+                        <div class="timeline-icon bg-primary rounded-circle d-flex justify-content-center align-items-center">
+                          <span class="fs-6 fs-lg-5 fs-xl-4 text-white">1</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="py-1 py-lg-0 px-lg-5 w-75 w-sm-50 w-lg-100 timeline-content">
+                      <h6 class="fs-8 fw-bold text-lg-center lh-lg mb-2">Sign Up</h6>
+                      <p class="text-lg-center lh-xl mb-0">
+                        Create your Fluxa account on the website with just your email and a password.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 2 -->
+                  <div class="col-12 col-lg-4 d-flex flex-row flex-lg-column justify-content-center gap-2 gap-sm-x1 gap-md-4 gap-lg-0">
+                    <div class="timeline-step-2 w-25 w-lg-100 mb-4 mb-lg-5 mb-xl-6">
+                      <div class="timeline-item d-flex justify-content-center">
+                        <div class="timeline-icon bg-success rounded-circle d-flex justify-content-center align-items-center">
+                          <span class="fs-6 fs-lg-5 fs-xl-4 text-white">2</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="py-1 py-lg-0 px-lg-5 w-75 w-sm-50 w-lg-100 timeline-content">
+                      <h6 class="fs-8 fw-bold text-lg-center lh-lg mb-2">Set Up Dashboard</h6>
+                      <p class="text-lg-center lh-xl mb-0">
+                        Add your products, income sources, and expenses to create your personalized dashboard.
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Step 3 -->
+                  <div class="col-12 col-lg-4 d-flex flex-row flex-lg-column justify-content-center gap-2 gap-sm-x1 gap-md-4 gap-lg-0">
+                    <div class="timeline-step-3 position-relative z-1 overflow-hidden w-25 w-lg-100 mb-4 mb-lg-5 mb-xl-6">
+                      <div class="timeline-item d-flex justify-content-center">
+                        <div class="timeline-icon bg-info rounded-circle d-flex justify-content-center align-items-center">
+                          <span class="fs-6 fs-lg-5 fs-xl-4 text-white">3</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="py-1 py-lg-0 px-lg-5 w-75 w-sm-50 w-lg-100 timeline-content">
+                      <h6 class="fs-8 fw-bold text-lg-center lh-lg mb-2">Start Tracking</h6>
+                      <p class="text-lg-center lh-xl mb-0">
+                        Begin tracking your income, expenses, and inventory in real time to make smarter business decisions.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="experience position-relative overflow-hidden" id="service">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="position-relative z-1 text-center mb-8 mb-lg-9">
+                    <!-- Ici on pourrait mettre une image ou animation montrant le dashboard Fluxa -->
+                    <video class="w-100 h-100 rounded-4" src="{{ url_for('static', filename='home/assets/video/Tech_video.mp4')}}" poster="{{ url_for('static', filename='home/assets/img/Hero/experiences.jpg')}}" type="video/mp4" data-video-player="data-video-player"></video>
+                  </div>
+                </div>
+                <div class="col-md-8 col-lg-7">
+                  <h2 class="fs-4 fs-lg-3 fw-bold text-center text-white mb-5 mb-lg-9 lh-sm">
+                    Fluxa solves your business tracking problems
+                  </h2>
+                </div>
+                <div class="col-12">
+                  <div class="row gy-4 g-md-3 pb-8 pb-lg-11 px-1">
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/roadmap.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Income Tracking</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Monitor all incoming cash flows from sales, clients, and other revenue sources.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/users-wm.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Expense Management</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Track all outgoing payments to keep expenses under control and improve profitability.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/share-91.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Inventory & Stock</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Know what products you have in real-time to avoid shortages or overstocking.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/video_meeting.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Reports & Insights</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Generate clear, easy-to-read reports to guide your financial and business decisions.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/opening-times.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Payment & Invoicing</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Create invoices and receive payments in one place with a simple system.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-lg-4 d-flex align-items-start gap-2">
+                      <img src="{{ url_for('static', filename='home/assets/img/icons/card-favorite.svg')}}" alt="" />
+                      <div>
+                        <h5 class="fs-8 text-white lh-lg fw-bold">Dashboard Customization</h5>
+                        <p class="text-white text-opacity-50 lh-xl mb-0">
+                          Personalize your dashboard to track exactly what matters most to your business.
+                        </p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="position-absolute top-0 start-0 end-0">
+              <div class="bg-white py-3 py-md-9 py-xl-10"> </div>
+              <img class="wave" src="{{ url_for('static', filename='home/assets/img/illustrations/Wave_2.svg')}}" alt="" />
+            </div>
+          </section>
+
+          <section class="bg-1100 mt-n1">
+            <div class="mx-auto text-center">
+              <hr class="horizontal-rule m-0 d-inline-block" />
+            </div>
+            <div class="container pb-8 pb-lg-10">
+              <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-7">
+                  <h2 class="fs-6 fs-lg-5 fw-bold text-white text-center pt-7 pb-4 pt-lg-9 pb-lg-6 lh-lg">
+                    <span class="underline">150+ businesses</span> trust Fluxa to manage their financial flows!
+                  </h2>
+                </div>
+                <div class="col-12 mb-4 mb-lg-6">
+                  <div class="row g-2">
+                    <div class="swiper-theme-container">
+                      <div class="swiper position-relative" data-swiper='{"spaceBetween":20,"mousewheel":{"forceToAxis":true,"sensitiviye":20,"releaseOnEdges":true},"autoplay":{"delay":4000,"disableOnInteraction":false},"breakpoints":{"0":{"slidesPerView":1,"direction":"horizontal","centeredSlide":true,"loop":true},"768":{"direction":"horizontal","centeredSlide":true,"slidesPerView":2,"loop":true},"992":{"slidesPerView":3,"direction":"vertical","loop":false}}}'>
+                        <div class="swiper-wrapper">
+
+                          <!-- Témoignage 1 -->
+                          <div class="col-12 swiper-slide">
+                            <div class="d-flex justify-content-center gap-2">
+                              <div class="d-flex flex-column flex-lg-row gap-2 px-4 py-x1 review-card-1">
+                                <div class="text-center text-lg-start">
+                                  <img class="card-image rounded-circle object-fit-cover" src="{{ url_for('static', filename='home/assets/img/feedback/kakashi.webp')}}" alt="Client 1" />
+                                </div>
+                                <div class="text-center text-lg-start">
+                                  <p class="fs-8 mb-2 lh-lg line-clamp-3 text-1100">
+                                    “Fluxa simplified all our financial tracking. Now we know exactly where our money goes each month.”
+                                  </p>
+                                  <p class="text-800 lh-xl mb-0">Jean Mbala – Mbala Trading</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Témoignage 2 -->
+                          <div class="col-12 swiper-slide">
+                            <div class="d-flex justify-content-center gap-2">
+                              <div class="d-flex flex-column flex-lg-row gap-2 px-4 py-x1 review-card-2">
+                                <div class="text-center text-lg-start">
+                                  <img class="card-image rounded-circle object-fit-cover" src="{{ url_for('static', filename='home/assets/img/feedback/obito.webp')}}" alt="Client 2" />
+                                </div>
+                                <div class="text-center text-lg-start">
+                                  <p class="fs-8 mb-2 lh-lg line-clamp-3 text-1100">
+                                    “Tracking our stock and sales has never been easier. Fluxa gives me peace of mind every day.”
+                                  </p>
+                                  <p class="text-800 lh-xl mb-0">Chantal Kabila – Kabila Stores</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Témoignage 3 -->
+                          <div class="col-12 swiper-slide">
+                            <div class="d-flex justify-content-center gap-2">
+                              <div class="d-flex flex-column flex-lg-row gap-2 px-4 py-x1 review-card-3">
+                                <div class="text-center text-lg-start">
+                                  <img class="card-image rounded-circle object-fit-cover" src="{{ url_for('static', filename='home/assets/img/feedback/kakashi.webp')}}" alt="Client 3" />
+                                </div>
+                                <div class="text-center text-lg-start">
+                                  <p class="fs-8 mb-2 lh-lg line-clamp-3 text-1100">
+                                    “The reports and dashboards are very easy to understand. We can make better decisions for our business now.”
+                                  </p>
+                                  <p class="text-800 lh-xl mb-0">Patrick Mbuyi – Mbuyi Foods</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Témoignage 4 -->
+                          <div class="col-12 swiper-slide">
+                            <div class="d-flex justify-content-center gap-2">
+                              <div class="d-flex flex-column flex-lg-row gap-2 px-4 py-x1 review-card-3">
+                                <div class="text-center text-lg-start">
+                                  <img class="card-image rounded-circle object-fit-cover" src="{{ url_for('static', filename='home/assets/img/feedback/obito.webp')}}" alt="Client 3" />
+                                </div>
+                                <div class="text-center text-lg-start">
+                                  <p class="fs-8 mb-2 lh-lg line-clamp-3 text-1100">
+                                    “The reports and dashboards are very easy to understand. We can make better decisions for our business now.”
+                                  </p>
+                                  <p class="text-800 lh-xl mb-0">Patrick Mbuyi – Mbuyi Foods</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <a class="py-1 link-success" href="#!">
+                    <span>Read more reviews </span>
+                    <span class="uil uil-arrow-right icon"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-300" id="pricing">
+            {% if plan %}
+              <div class="container py-8 py-lg-10">
+                <div class="row justify-content-center">
+                  <div class="col-md-8 col-lg-7">
+                    <h3 class="fs-4 fs-lg-3 fw-bold text-center mb-2 mb-lg-x1 lh-sm">Pricing made simple</h3>
+                    <p class="fs-8 mb-7 mb-lg-8 text-center lh-lg fw-normal">
+                      Choose the plan that fits your business needs and start tracking your financial flows instantly.
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <div class="d-flex flex-column flex-md-row justify-content-center align-items-start gap-3">
+
+                      <!-- Plan Petite Entreprise -->
+                      {% for p in plan %}
+                        <div class="p-x1 text-center bg-white border shadow-sm rounded-2 pricing-card">
+                          <p class="fs-10 text-uppercase mb-3 fw-bold text-primary ls-2">{{ p.name}}</p>
+                          <h2 class="mb-3"><span class="fs-6 fs-md-7 fw-bold">$</span><span class="fs-2 fs-md-1 fw-bold">{{ p.price }}</span><span class="fs-9 lh-xl font-sans-serif">/ {{ p.billing_cycle[:1]}}</span></h2>
+                          <ul class="list-unstyled fs-8 lh-xl fw-light text-1100 ls-1">
+                            <li class="py-x1 px-1 border-top">legal structure: {{ p.allowed_legal_structures}}</li>
+                            <li class="py-x1 px-1 border-top">Industries: {{ p.allowed_industries }}</li>
+                            <li class="py-x1 px-1 border-top">Max size business: {{ p.max_business_size }}</li>
+                            <li class="py-x1 px-1 border-top">{% if p.name == 'Starter'%}1 User only{% elif p.name == 'Growth'%}5 Users{% elif p.name == 'Enterprise'%}15 Users{% else %}Unlimited Users{% endif %}</li>
+                            <li class="py-x1 px-1 border-top">{{ p.description }}</li>
+                            <li class="mt-1 d-grid"><a class="btn btn-primary btn-lg lh-xl" href="{{ url_for('auth_blueprint.business', plan_id=p.id) }}">Get Started</a></li>
+                          </ul>
+                        </div>
+                      {% endfor %}
+
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </section>
+
+          <section class="bg-1100">
+            <div class="container">
+              <div class="row py-8 py-md-10 py-lg-11">
+
+                <!-- Points forts / backup -->
+                <div class="col-lg-6">
+                  <div class="row justify-content-center justify-content-lg-start">
+                    <div class="col-md-8 col-lg-12 col-xl-11">
+                      <h2 class="text-white fs-4 fs-lg-3 lh-sm mb-2 text-center text-lg-start fw-bold">
+                        Fluxa is always here to back your business.
+                      </h2>
+                      <p class="fs-8 text-white text-opacity-65 mb-4 mb-md-6 mb-lg-7 lh-lg text-center text-lg-start">
+                        We provide secure and reliable tools to track financial flows, manage inventory, and generate reports for better business decisions.
+                      </p>
+                    </div>
+                    <div class="col-lg-10">
+
+                      <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+                        <div>
+                          <div class="check-icon bg-success mb-1 rounded-circle d-flex align-items-center justify-content-center">
+                            <span class="uil uil-check text-white"></span>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 class="fs-8 fw-bold lh-lg mb-1 text-white">Secure Data Storage</h5>
+                          <p class="lh-xl text-white text-opacity-70 mb-0">
+                            All your financial data is safely stored in the cloud with regular backups.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+                        <div>
+                          <div class="check-icon bg-success mb-1 rounded-circle d-flex align-items-center justify-content-center">
+                            <span class="uil uil-check text-white"></span>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 class="fs-8 fw-bold lh-lg mb-1 text-white">24/7 Support</h5>
+                          <p class="lh-xl text-white text-opacity-70 mb-0">
+                            Our team is ready to help you anytime, ensuring smooth operations for your business.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="d-flex gap-2 gap-lg-x1 mb-4 mb-lg-5">
+                        <div>
+                          <div class="check-icon bg-success mb-1 rounded-circle d-flex align-items-center justify-content-center">
+                            <span class="uil uil-check text-white"></span>
+                          </div>
+                        </div>
+                        <div>
+                          <h5 class="fs-8 fw-bold lh-lg mb-1 text-white">Real-time Reports</h5>
+                          <p class="lh-xl text-white text-opacity-70 mb-0">
+                            Generate and access reports instantly to track revenue, expenses, and inventory.
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FAQ Accordion -->
+                <div class="col-lg-6">
+                  <div class="accordion mt-lg-4 ps-3 pe-x1 bg-white" id="accordion">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading1">
+                        <button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                          How do I set up my Fluxa dashboard?
+                        </button>
+                      </h2>
+                      <div class="accordion-collapse collapse show" id="collapse1" data-bs-parent="#accordion">
+                        <div class="accordion-body lh-xl pt-0 pb-x1">
+                          Sign up, add your business info, and start tracking your financial flows in a few clicks.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading2">
+                        <button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                          Can I add multiple users for my team?
+                        </button>
+                      </h2>
+                      <div class="accordion-collapse collapse" id="collapse2" data-bs-parent="#accordion">
+                        <div class="accordion-body lh-xl pt-0 pb-x1">
+                          Yes, you can add as many users as your plan allows and assign them specific roles.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading3">
+                        <button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                          How secure is my data?
+                        </button>
+                      </h2>
+                      <div class="accordion-collapse collapse" id="collapse3" data-bs-parent="#accordion">
+                        <div class="accordion-body lh-xl pt-0 pb-x1">
+                          All data is encrypted and stored on secure servers with daily backups.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading4">
+                        <button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                          Can I access old reports?
+                        </button>
+                      </h2>
+                      <div class="accordion-collapse collapse" id="collapse4" data-bs-parent="#accordion">
+                        <div class="accordion-body lh-xl pt-0 pb-x1">
+                          Yes, all reports are stored in your dashboard and can be accessed anytime.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="heading5">
+                        <button class="accordion-button fs-8 lh-lg fw-bold pt-x1 pb-2 collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                          How can I get support if needed?
+                        </button>
+                      </h2>
+                      <div class="accordion-collapse collapse" id="collapse5" data-bs-parent="#accordion">
+                        <div class="accordion-body lh-xl pt-0 pb-x1">
+                          Contact our support team via email or chat directly in your dashboard; we respond quickly.
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <section class="bg-300 position-relative z-0" id="contact">
+            <div class="container py-8 py-lg-9">
+              <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-8">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-lg-10">
+                      <h2 class="fs-4 fs-lg-3 fw-bold text-center mb-2 lh-sm">
+                        Stay Updated with Fluxa
+                      </h2>
+                      <p class="fs-8 mb-5 mb-lg-6 text-center lh-lg fw-normal">
+                        Subscribe to our newsletter to receive tips, updates, and best practices for managing your business flows efficiently.
+                      </p>
+                    </div>
+                    <div class="col-10 col-lg-7">
+                      <form method="POST" onsubmit="return false;">
+                        <div class="mb-2 w-100">
+                          <input class="form-control email-input" id="email" type="email" placeholder="Enter your email" required="required" />
+                        </div>
+                        <div class="d-grid">
+                          <button class="btn btn-lg btn-primary lh-xl mb-x1" type="submit">
+                            Subscribe
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="col-10 col-lg-7">
+                      <p class="text-center lh-lg mb-0">
+                        We respect your privacy. Your information will never be shared with third parties.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decorations -->
+            <div class="position-absolute bottom-0 end-0 z-n1 d-none d-lg-block">
+              <img src="{{ url_for('static', filename='home/assets/img/illustrations/Green_dots.svg')}}" alt="" />
+            </div>
+            <div class="position-relative bottom-0 start-0 z-1">
+              <img class="img-fluid w-100" src="{{ url_for('static', filename='home/assets/img/illustrations/Wave_3.svg')}}" alt="" />
+            </div>
+          </section>
+
+        </div><button class="btn scroll-to-top text-white rounded-circle d-flex justify-content-center align-items-center bg-primary" data-scroll-top="data-scroll-top"><span class="uil uil-angle-up"></span></button>
+        
+        <footer class="pt-7 pt-lg-8">
+          <div class="container">
+            <div class="row gy-4 g-md-3 border-bottom pb-8 pb-lg-9 justify-content-center">
+              <div class="col-6 col-md-3">
+                <p class="mb-2 lh-lg ls-1">Company</p>
+                <ul class="list-unstyled text-1100">
+                  <li class="mb-1"> <a class="ls-1 lh-xl" href="#about">About us</a></li>
+                  <li class="mb-1"> <a class="ls-1 lh-xl" href="#contact"> Contact us</a></li>
+                </ul>
+              </div>
+              <div class="col-6 col-md-3">
+                <p class="mb-2 lh-lg">Product</p>
+                <ul class="list-unstyled text-1100">
+                  <li class="mb-1"> <a class="ls-1 lh-xl" href="#!"> Help desk</a></li>
+                  <li class="mb-1"><a class="ls-1 lh-xl" href="#!"> Support</a></li>
+                </ul>
+              </div>
+              <div class="col-6 col-md-3">
+                <p class="mb-2 lh-lg"> Legal</p>
+                <ul class="list-unstyled text-1100">
+                  <li class="mb-1"> <a class="ls-1 lh-xl" href="/privacy">Privacy</a></li>
+                  <li class="mb-1"> <a class="ls-1 lh-xl" href="/conditions"> Terms & Conditions</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="row gy-2 py-3 justify-content-center justify-content-md-between">
+              <div class="col-auto ps-0">
+                <p class="text-center text-md-start lh-xl text-1100"> © 2026 Copyright, All Right Reserved, Made by <a class="fw-semi-bold" href="mailto:chrinovicnyembo009@gmail.com">Developer </a></p>
+              </div>
+              <div class="col-auto pe-0"><a class="icons fs-8 me-3 me-md-0 ms-md-3 cursor-pointer" href="#!"><span class="uil uil-twitter"> </span></a><a class="icons fs-8 me-3 me-md-0 ms-md-3 cursor-pointer" href="#!"><span class="uil uil-instagram"></span></a><a class="icons fs-8 me-3 me-md-0 ms-md-3 cursor-pointer" href="#!"><span class="uil uil-linkedin"> </span></a></div>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+    </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
+
+    <!-- Container des toasts -->
+    <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="toast align-items-center text-bg-{{ category }} border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+                <div class="d-flex">
+                <div class="toast-body">
+                    {% if category == 'success' %}
+                    ✅ {{ message }}
+                    {% elif category == 'danger' %}
+                    ❌ {{ message }}
+                    {% elif category == 'warning' %}
+                    ⚠️ {{ message }}
+                    {% elif category == 'info' %}
+                    ℹ️ {{ message }}
+                    {% else %}
+                    {{ message }}
+                    {% endif %}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- ===============================================--><!--    JavaScripts--><!-- ===============================================-->
+    <script src="{{ url_for('static', filename='home/assets/js/toast.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/popper/popper.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/is/is.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/countup/countUp.umd.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/swiper/swiper-bundle.min.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/vendors/lodash/lodash.min.js')}}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{{ url_for('static', filename='home/assets/js/theme.js')}}"></script>
+    <script src="{{ url_for('static', filename='home/assets/js/statistics.js')}}"></script>
+  </body>
+
+</html>

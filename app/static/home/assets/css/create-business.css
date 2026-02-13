@@ -1,0 +1,264 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #3a40ee, #9966e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Layout */
+.setup-container {
+  width: 90%;
+  max-width: 1200px;
+  height: 680px;
+  display: flex;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+}
+
+/* Left */
+.setup-hero {
+  flex: 1.2;
+  background: url('../img/Hero/business.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+.setup-hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+}
+
+.hero-content {
+  position: relative;
+  padding: 60px;
+}
+
+.hero-content h1 {
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.hero-content h1 span {
+  color: #e46262;
+}
+
+.hero-content p {
+  margin-top: 18px;
+  max-width: 380px;
+  opacity: 0.85;
+}
+
+/* Right */
+.setup-form {
+  flex: 1;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+}
+
+.glass {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+}
+
+.setup-form h2 {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 24px;
+}
+
+form {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-section {
+  margin-bottom: 22px;
+}
+
+.form-section h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255,255,255,0.18);
+  color: white;
+  outline: none;
+}
+
+.add-btn {
+  background: rgba(255,255,255,0.2);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.2s ease;
+}
+
+.add-btn:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* Button */
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 18px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: white;
+  color: #0f172a;
+  transition: transform 0.2s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Footer */
+footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+#business-form {
+  max-width: 800px;
+  margin: auto;
+}
+
+.form-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.form-section h3 {
+  margin-bottom: 16px;
+}
+
+.form-section input,
+.form-section select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  color: #0f172a;
+}
+
+.add-btn {
+  background: transparent;
+  border: 1px dashed #4caf50;
+  padding: 10px;
+  color: #4caf50;
+  cursor: pointer;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  background: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+
+/* =========================
+   RESPONSIVE – AJUSTEMENT AFFICHAGE
+   ========================= */
+
+@media (max-width: 768px) {
+
+  body {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .setup-container {
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  /* HERO AU-DESSUS */
+  .setup-hero {
+    flex: none;
+    height: 38vh;
+  }
+
+  .hero-content {
+    padding: 32px 24px;
+  }
+
+  .hero-content h1 {
+    font-size: 26px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+  /* FORMULAIRE EN DESSOUS */
+  .setup-form {
+    flex: 1;
+    padding: 28px 22px;
+    overflow-y: auto;
+  }
+
+  .setup-form h2 {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  input {
+    padding: 14px 16px;
+    font-size: 14px;
+    border-radius: 16px;
+  }
+
+  .primary-btn {
+    padding: 16px;
+    border-radius: 20px;
+    font-size: 15px;
+  }
+
+  footer {
+    margin-bottom: 12px;
+  }
+}

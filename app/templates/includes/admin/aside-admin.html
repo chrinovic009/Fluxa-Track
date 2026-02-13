@@ -1,0 +1,81 @@
+<div class="sidenav-header">
+  <i translate="no" class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+     aria-hidden="true" id="iconSidenav"></i>
+
+  <a class="navbar-brand px-4 py-3 m-0" href="">
+    <img src="{{ url_for('static', filename='home/assets/img/logos/logo-n.png') }}"
+         class="navbar-brand-img" width="26" height="26" alt="main_logo">
+    <span class="ms-1 text-sm text-dark">Fluxa</span>
+  </a>
+</div>
+
+<hr class="horizontal dark mt-0 mb-2">
+
+<div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+  {% if company_link.role == "owner"%}
+    <ul class="navbar-nav">
+
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'admin' %} active bg-gradient-dark text-white{% endif %}" href="/admin/admin">
+          <i translate="no" class="material-symbols-rounded opacity-5">dashboard</i>
+          <span class="nav-link-text ms-1">Overview</span>
+        </a>
+      </li>
+
+      <!-- Sales -->
+      <li class="nav-item">
+        <a class="nav-link text-dark{% if page_active == 'sales' %} active bg-gradient-dark text-white{% endif %}" href="/admin/sales">
+          <i translate="no" class="material-symbols-rounded opacity-5">shopping_cart</i>
+          <span class="nav-link-text ms-1">Sales</span>
+        </a>
+      </li>
+
+      {% if subscription_plan.name == "Growth" or subscription_plan.name == "Enterprise" or subscription_plan.name == "Corporate" %}
+        <!-- Customers -->
+        <li class="nav-item">
+          <a class="nav-link text-dark {% if page_active == 'customers' %} active bg-gradient-dark text-white{% endif %}" href="/admin/customers">
+            <i translate="no" class="material-symbols-rounded opacity-5">group</i>
+            <span class="nav-link-text ms-1">Administrator</span>
+          </a>
+        </li>
+      {% endif %}
+
+      <!-- Reports -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'reports' %} active bg-gradient-dark text-white{% endif %}" href="/admin/reports">
+          <i translate="no" class="material-symbols-rounded opacity-5">bar_chart</i>
+          <span class="nav-link-text ms-1">Reports</span>
+        </a>
+      </li>
+
+      <!-- Notifications -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'notifications' %} active bg-gradient-dark text-white{% endif %}" href="/admin/notifications">
+          <i translate="no" class="material-symbols-rounded opacity-5">notifications</i>
+          <span class="nav-link-text ms-1">Alerts</span>
+        </a>
+      </li>
+
+
+    </ul>
+  {% else %}
+    <ul class="navbar-nav">
+      <!-- Sales -->
+      <li class="nav-item">
+        <a class="nav-link text-dark{% if page_active == 'sales' %} active bg-gradient-dark text-white{% endif %}" href="/admin/sales">
+          <i translate="no" class="material-symbols-rounded opacity-5">shopping_cart</i>
+          <span class="nav-link-text ms-1">Sales</span>
+        </a>
+      </li>
+    </ul>
+  {% endif %}
+</div>
+
+<div class="sidenav-footer position-absolute w-100 bottom-0">
+  <div class="mx-3">
+    <a class="btn btn-outline-dark mt-4 w-100" href="/admin/support" type="button">
+      Support
+    </a>
+  </div>
+</div>

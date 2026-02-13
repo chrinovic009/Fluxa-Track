@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Creating Dashboard...</title>
+      <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+        <link rel="manifest" href="{{ url_for('static', filename='home/assets/img/favicons/manifest.json')}}">
+        <meta name="msapplication-TileImage" content="{{ url_for('static', filename='home/assets/img/favicons/mstile-150x150.png')}}">
+        <meta name="theme-color" content="#ffffff">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='home/assets/css/loading.css')}}">
+  </head>
+
+  <body>
+    <div class="loading-screen">
+      <img src="static/home/assets/img/logos/fluxa-w.png" alt="Fluxa Logo" class="logo" />
+      <p class="status-text">Initializing dashboard creation...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='home/assets/js/loading.js')}}"></script>
+  </body>
+  
+</html>

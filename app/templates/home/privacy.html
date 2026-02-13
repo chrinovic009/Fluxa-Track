@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
+  <link rel="manifest" href="{{ url_for('static', filename='home/assets/img/favicons/manifest.json')}}">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='home/assets/css/privacy.css')}}" />
+</head>
+<body>
+
+  <section class="privacy-section">
+    <!-- Left side: Security tips and CTA -->
+    <div class="privacy-left">
+      <div class="icon-box">
+        <i translate="no" class="material-symbols-rounded lock-icon">lock</i>
+      </div>
+      <h1 class="privacy-title">3 Secrets for Safe Online Payments</h1>
+      <p class="privacy-subtext">Stay safe online with these quick tips for secure transactions.</p>
+      <ul class="privacy-list">
+        <li>✔ Use PCI DSS-compliant platforms</li>
+        <li>✔ Avoid public Wi-Fi for payments</li>
+        <li>✔ Enable two-factor authentication</li>
+      </ul>
+      <button class="cta-btn">Take Action</button>
+      <p class="contact-info">
+        📞 <a href="tel:+243848621712">+243 848 621 712</a><br />
+        🌐 <a href="/">Home</a>
+      </p>
+    </div>
+
+    <!-- Right side: Privacy policy content -->
+    <div class="privacy-right">
+      <h2 class="policy-heading">Privacy Policy</h2>
+      <div class="policy-content" id="policy-content">
+        <!-- JS will inject sections here -->
+      </div>
+    </div>
+  </section>
+
+  <script src="{{ url_for('static', filename='home/assets/js/privacy.js')}}"></script>
+</body>
+</html>
