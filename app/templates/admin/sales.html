@@ -43,7 +43,15 @@
                           </div>
                           <div>
                             <p class="text-white text-sm opacity-8 mb-0">Point of sale</p>
-                            <h6 class="text-white mb-0">{{ sale_point|length }}/5</h6>
+                            {% if subscription_plan.name == "Starter" %}
+                              <h6 class="text-white mb-0">{{ points.sale_point }}</h6>
+                            {% elif subscription_plan.name == "Enterprise" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}/15</h6>
+                            {% elif subscription_plan.name == "Corporate" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}</h6>
+                            {% elif subscription_plan.name == "Growth" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}/5</h6>
+                            {% endif %}
                           </div>
                         </div>
                         <div class="ms-auto w-20 d-flex align-items-end justify-content-end"> 
@@ -106,10 +114,71 @@
                         <h6 class="mb-0">Manage Business</h6>
                       </div>
                       <div class="col-6 text-end">
-                        <a class="btn bg-gradient-dark mb-0" href=""
+                        <a class="btn bg-gradient-dark mb-0 me-2"
+                          href=""
                           data-bs-toggle="modal"
                           data-bs-target="#newproductModal"
-                          role="button"><i translate="no" class="material-symbols-rounded text-sm">add</i>&nbsp;&nbsp;Add New Product</a>
+                          role="button">
+                          <i class="material-symbols-rounded text-sm">add</i>
+                          Add New Product
+                        </a>
+
+                        <a class="btn bg-gradient-dark mb-0"
+                          href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#newSaleModaladmin"
+                          role="button">
+                          <i class="material-symbols-rounded text-sm">sell</i>
+                          Record Sale
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SALE PRODUCT MODAL -->
+                  <div class="modal fade" id="newSaleModaladmin" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Record Sale
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addSaleForm" action="{{ url_for('admin_blueprint.add_sale') }}" method="POST">
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-box-seam me-1 text-primary"></i> Product
+                                </label>
+                                <select name="product_id" class="form-select form-select-lg rounded-3 shadow-sm" required>
+                                  {% for p in product_statss %}
+                                    {% if p.stock > 0 %}
+                                      <option value="{{ p.id }}">
+                                        {{ p.name }} (Stock: {{ p.stock }}, Price: {{ p.unit_price }} {{ company_link.company.currency }})
+                                      </option>
+                                    {% endif %}
+                                  {% endfor %}
+                                </select>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-cart-check me-1 text-success"></i> Quantity Sold
+                                </label>
+                                <input type="number" name="quantity" min="1" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter quantity sold" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Record Sale</button>
+                          </form>
+                        </div>
+
                       </div>
                     </div>
                   </div>
@@ -575,7 +644,7 @@
                         <a class="btn bg-gradient-dark mb-0" href=""
                           data-bs-toggle="modal"
                           data-bs-target="#newSaleModal"
-                          role="button"><i translate="no" class="material-symbols-rounded text-sm">add</i>&nbsp;&nbsp;Record Sale</a>
+                          role="button"><i translate="no" class="material-symbols-rounded text-sm">sell</i>&nbsp;&nbsp;Record Sale</a>
                       </div> <br>
                     </div>
                   </div>

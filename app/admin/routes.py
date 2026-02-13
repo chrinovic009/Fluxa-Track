@@ -176,6 +176,10 @@ def sales():
         company_id=company_link.company_id
     ).all()
 
+    points = CompanyUser.query.filter_by(
+        company_id=company_link.company_id
+    ).first()
+
     # Tous les liens user ↔ company (si user est lié à plusieurs entreprises)
     company_links = CompanyUser.query.filter_by(user_id=user.id).all()
 
@@ -238,7 +242,7 @@ def sales():
         sale_point=company_users,
         product_statss=product_statss,
         transactions=transactions, balance_sheet=bilan, 
-        subscription_plan=subscription_plan
+        subscription_plan=subscription_plan, points=points
     )
 
 # pour ajouter un produit via modal
