@@ -1,0 +1,52 @@
+<div class="container-fluid">
+  <div class="row align-items-center justify-content-lg-between">
+    <div class="col-lg-6 mb-lg-0 mb-4">
+      <div class="copyright text-center text-sm text-muted text-lg-start">
+        © 2026,
+        made by
+        <a href="mailto:chrinovicnyembo00@gmail.com" class="font-weight-bold" target="_blank">Developer</a>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+        <li class="nav-item">
+          <a href="/" class="nav-link text-muted">Fluxa</a>
+        </li>
+        <li class="nav-item"> 
+          <a href="/#about" class="nav-link text-muted">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a href="/privacy" class="nav-link pe-0 text-muted">Privacy</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Container des toasts -->
+<div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="toast align-items-center text-bg-{{ category }} border-0 mb-2" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+          <div class="d-flex">
+            <div class="toast-body">
+              {% if category == 'success' %}
+                ✅ {{ message }}
+              {% elif category == 'danger' %}
+                ❌ {{ message }}
+              {% elif category == 'warning' %}
+                ⚠️ {{ message }}
+              {% elif category == 'info' %}
+                ℹ️ {{ message }}
+              {% else %}
+                {{ message }}
+              {% endif %}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+</div>

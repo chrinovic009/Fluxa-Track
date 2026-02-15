@@ -1,0 +1,58 @@
+<div class="sidenav-header">
+  <i translate="no" class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+     aria-hidden="true" id="iconSidenav"></i>
+
+  <a class="navbar-brand px-4 py-3 m-0" href="">
+    <img src="{{ url_for('static', filename='home/assets/img/logos/logo-n.png') }}"
+         class="navbar-brand-img" width="26" height="26" alt="main_logo">
+    <span class="ms-1 text-sm text-dark">Fluxa</span>
+  </a>
+</div>
+
+<hr class="horizontal dark mt-0 mb-2">
+
+<div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+    <ul class="navbar-nav">
+
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'manager' %} active bg-gradient-dark text-white{% endif %}" href="/manager/manager">
+          <i translate="no" class="material-symbols-rounded opacity-5">dashboard</i>
+          <span class="nav-link-text ms-1">Dashboard</span>
+        </a>
+      </li>
+
+      <!-- Companies Management -->
+      <li class="nav-item">
+        <a class="nav-link text-dark{% if page_active == 'company' %} active bg-gradient-dark text-white{% endif %}" href="/manager/company">
+          <i translate="no" class="material-symbols-rounded opacity-5">work</i>
+          <span class="nav-link-text ms-1">Business Management</span>
+        </a>
+      </li>
+
+      <!-- Subscription Management -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'subscription' %} active bg-gradient-dark text-white{% endif %}" href="/manager/subscription">
+          <i translate="no" class="material-symbols-rounded opacity-5">repeat</i>
+          <span class="nav-link-text ms-1">Subscription Management</span>
+        </a>
+      </li>
+
+      <!-- Reports -->
+      <li class="nav-item">
+        <a class="nav-link text-dark {% if page_active == 'report' %} active bg-gradient-dark text-white{% endif %}" href="/manager/report">
+          <i translate="no" class="material-symbols-rounded opacity-5">policy</i>
+          <span class="nav-link-text ms-1">Report</span>
+        </a>
+      </li>
+
+    </ul>
+</div>
+
+<div class="sidenav-footer position-absolute w-100 bottom-0">
+  <div class="mx-3">
+    <a class="btn btn-outline-dark mt-4 w-100" href="/manager/support" type="button">
+      Support
+    </a>
+  </div>
+</div>

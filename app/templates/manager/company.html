@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'includes/manager/head.html' %}
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
+    {% include 'includes/manager/aside.html' %}
+  </aside>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      {% include 'includes/manager/nav.html' %}
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-2">
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+
+            <div class="col-xl-6 mb-xl-0 mb-4">
+              
+              <div class="card bg-transparent shadow-xl">
+                <div class="overflow-hidden position-relative border-radius-xl">
+                  <img src="{{ url_for('static', filename='home/assets/img/logos/bitcoin.jpg')}}" class="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree">
+                  <span class="mask bg-gradient-dark opacity-10"></span>
+                  <div class="card-body position-relative z-index-1 p-3">
+                    <span class="text-white p-2"><img src="{{ url_for('static', filename='home/assets/img/logos/fluxa-w-1.png')}}" alt="bitcoin" width="80px"></span>
+                    <h5 class="text-white mt-4 mb-5 pb-2">Over {{ total_companies }} companies use it</h5>
+                    <div class="d-flex">
+                      <div class="d-flex">
+                        <div class="me-4">
+                          <p class="text-white text-sm opacity-8 mb-0">Responsible</p>
+                          <h6 class="text-white mb-0">Chrinovic Nyembo</h6>
+                        </div>
+                        <div>
+                          <p class="text-white text-sm opacity-8 mb-0">Active Subscriptions</p>
+                          <h6 class="text-white mb-0">{{ active_subscriptions }}/{{ total_companies }}</h6>
+                        </div>
+                      </div>
+                      <div class="ms-auto w-20 d-flex align-items-end justify-content-end"> 
+                        <img class="w-60 mt-2" src="{{ url_for('static', filename='admin/assets/img/illustrations/rocket-white.png')}}" alt="logo3">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-xl-6">
+              <div class="row">
+
+                <div class="col-md-6 col-6">
+                  <div class="card">
+                    <div class="card-header mx-4 p-3 text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                        <i translate="no" class="material-symbols-rounded opacity-10">schedule</i>
+                      </div>
+                    </div>
+                    <div class="card-body pt-0 p-3 text-center">
+                      <h6 class="text-center mb-0">Inactive Companies</h6>
+                      <span class="text-xs">No activity ≥ 7 days</span>
+                      <hr class="horizontal dark my-3">
+
+                      <h5 class="mb-0">
+                        {{ inactive_companies_count }}
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-6">
+                  <div class="card">
+                    <div class="card-header mx-4 p-3 text-center">
+                      <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                        <i translate="no" class="material-symbols-rounded opacity-10">speed</i>
+                      </div>
+                    </div>
+                    <div class="card-body pt-0 p-3 text-center">
+                      <h6 class="text-center mb-0">Avg Requests / Min</h6>
+                      <span class="text-xs">Last 60 minutes</span>
+                      <hr class="horizontal dark my-3">
+                      <h5 class="mb-0">{{ avg_requests_per_minute }}</h5>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-12 mt-4">
+          <div class="card">
+            <div class="card-header pb-0 px-3">
+              <h6 class="mb-0">All Companies</h6>
+            </div>
+            <div class="card-body pt-4 p-3">
+              <ul class="list-group">
+                {% for item in company_data %}
+                  {% set c = item.company %}
+                  {% set ceo = item.ceo %}
+                  {% set sub = item.subscription %}
+                  <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                    <div class="d-flex flex-column">
+                      <h6 class="mb-3 text-sm">{{ c.name }}</h6>
+                      <span class="mb-2 text-xs">CEO: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ ceo.name if ceo else 'N/A' }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">CEO's Email: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ ceo.email if ceo else 'N/A' }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">Business Size: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ c.business_size }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">Legal Structure: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ c.legal_structure }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">Industry: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ c.industry }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">Sale Point: 
+                        <span class="text-dark font-weight-bold ms-sm-2">{{ item.total_sale_points }}</span>
+                      </span>
+                      <span class="mb-2 text-xs">Average Monthly Revenue: 
+                        <span class="text-dark ms-sm-2 font-weight-bold">
+                          <!-- Exemple: calculer via ReportSnapshot -->
+                          {{ item.avg_revenue | round(2) }} $
+                        </span>
+                      </span>
+                      <span class="text-xs">Main Address: 
+                        <span class="text-dark ms-sm-2 font-weight-bold">{{ c.address }}</span>
+                      </span>
+                      <span class="text-xs">Subscription Type: 
+                        <span class="text-dark ms-sm-2 font-weight-bold">{{ sub.plan.name if sub else 'No subscription' }}</span>
+                      </span>
+                      <span class="text-xs">Subscription Date: 
+                        <span class="text-dark ms-sm-2 font-weight-bold">{{ sub.start_date.strftime('%d %B %Y') if sub else 'N/A' }}</span>
+                      </span>
+                      <span class="text-xs">Renewal: 
+                        <span class="text-dark ms-sm-2 font-weight-bold">
+                          {% if sub and sub.end_date %}
+                            Renews until {{ sub.end_date.strftime('%d %B %Y') }}
+                          {% else %}
+                            N/A
+                          {% endif %}
+                        </span>
+                      </span>
+                    </div>
+                    <div class="ms-auto text-end">
+                        <form method="POST" action="{{ url_for('man_blueprint.toggle_subscription', company_id=c.id) }}">
+                          
+                          {% if sub and sub.status == "active" %}
+                            <button class="btn btn-link text-danger text-gradient px-3 mb-0">
+                              <i translate="no" class="material-symbols-rounded text-sm me-2">toggle_off</i>
+                              Deactivate
+                            </button>
+                          {% else %}
+                            <button class="btn btn-link text-success px-3 mb-0">
+                              <i translate="no" class="material-symbols-rounded text-sm me-2">toggle_on</i>
+                              Activate
+                            </button>
+                          {% endif %}
+
+                        </form>
+                    </div>
+                  </li>
+                  
+
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer class="footer py-4  ">
+        {% include 'includes/manager/footer.html' %}
+      </footer>
+
+    </div>
+
+  </main>
+
+  <!--   Core JS Files   -->
+  {% include 'includes/manager/script.html' %}
+
+</body>
+
+</html>

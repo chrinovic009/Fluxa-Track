@@ -1,0 +1,36 @@
+# Environnements virtuels
+env/
+venv/
+
+# Caches Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Configuration Flask / instance
+instance/
+.env
+
+# IDE / éditeurs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs et fichiers temporaires
+logs/
+*.log
+*.sqlite3
+*.db
+
+# Migrations (si tu ne veux pas les suivre)
+migrations/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Certificates / clés privées
+*.pem
+*.key

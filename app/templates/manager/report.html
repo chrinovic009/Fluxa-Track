@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'includes/manager/head.html' %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
+    {% include 'includes/manager/aside.html' %}
+  </aside>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      {% include 'includes/manager/nav.html' %}
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-2">
+
+      <div class="row">
+
+        <!-- FORMULAIRE DE FILTRAGE -->
+        <div class="col-12 mb-3">
+          <form method="get" action="{{ url_for('man_blueprint.report') }}" class="row g-3 align-items-end">
+            
+            <div class="col-md-3">
+              <label for="company" class="form-label">Company</label>
+              <select name="company_id" id="company" class="form-select">
+                <option value="">All Companies</option>
+                {% for company in companies %}
+                  <option value="{{ company.id }}" {% if request.args.get('company_id')|int == company.id %}selected{% endif %}>
+                    {{ company.name }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="from_date" class="form-label">From</label>
+              <input type="date" name="from_date" id="from_date" class="form-control" value="{{ request.args.get('from_date', '') }}">
+            </div>
+
+            <div class="col-md-3">
+              <label for="to_date" class="form-label">To</label>
+              <input type="date" name="to_date" id="to_date" class="form-control" value="{{ request.args.get('to_date', '') }}">
+            </div>
+
+            <div class="col-md-3">
+              <button type="submit" class="btn btn-dark w-100">Filter</button>
+            </div>
+
+          </form>
+        </div>
+
+        {% if logs %}
+          <div class="col-12">
+            <div class="card my-4">
+
+              <!-- HEADER -->
+              <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
+                  <h6 class="text-white text-capitalize ps-3">
+                    Enterprises Activity History
+                  </h6>
+                </div>
+              </div>
+
+              <!-- BODY -->
+              <div class="card-body px-0 pb-2">
+                <div class="table-responsive p-0">
+
+                  <table class="table align-items-center justify-content-center mb-0">
+                    <thead>
+                      <tr>
+                        <th>Date & Time</th>
+                        <th>Actor</th>
+                        <th>Company</th>
+                        <th>Action</th>
+                        <th>Module</th>
+                        <th>Sales Point</th>
+                        <th class="text-center">Impact</th>
+                        <th class="text-center">Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for log in logs %}
+                      <tr>
+                        <td><p class="text-sm mb-0">{{ log.created_at.strftime("%Y-%m-%d %H:%M") if log.created_at else "N/A" }}</p></td>
+                        <td>
+                          <h6 class="mb-0 text-sm">{{ log.actor_name }}</h6>
+                          <p class="text-xs text-secondary mb-0">{{ log.actor_role }}</p>
+                        </td>
+                        <td>{{ log.company_name }}</td>
+                        <td><span class="text-sm font-weight-bold">{{ log.action_type }}</span></td>
+                        <td><span class="text-xs font-weight-bold">{{ log.entity }}</span></td>
+                        <td><span class="text-xs font-weight-bold">{{ log.sale_point or 'N/A' }}</span></td>
+                        <td class="align-middle text-center">
+                          {% if log.impact_value != 0 %}
+                            <span class="{% if log.impact_value > 0 %}text-success{% else %}text-danger{% endif %} text-sm font-weight-bold">
+                              {% if log.impact_value > 0 %}+{% else %}-{% endif %} {{ log.impact_value }} {{ log.impact_unit }}
+                            </span>
+                          {% else %}
+                            <span class="text-secondary text-sm font-weight-bold">No Impact</span>
+                          {% endif %}
+                        </td>
+                        <td class="align-middle text-center">
+                          {% if log.status == "success" %}
+                            <span class="badge badge-sm bg-gradient-success">Success</span>
+                          {% elif log.status == "failed" %}
+                            <span class="badge badge-sm bg-gradient-danger">Failed</span>
+                          {% elif log.status == "approved" %}
+                            <span class="badge badge-sm bg-gradient-info">Approved</span>
+                          {% else %}
+                            <span class="badge badge-sm bg-gradient-warning">{{ log.status }}</span>
+                          {% endif %}
+                        </td>
+                        <td class="align-middle">
+                          <button class="btn btn-link text-secondary mb-0">
+                            <i class="fa fa-ellipsis-v text-xs"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% else %}
+          <div class="col-12">
+            <div class="alert alert-info text-center">No logs available for the selected filters.</div>
+          </div>
+        {% endif %}
+
+      </div>
+
+      <footer class="footer py-4  ">
+        {% include 'includes/manager/footer.html' %}
+      </footer>
+
+    </div>
+  </main>
+
+  <!--   Core JS Files   -->
+  {% include 'includes/manager/script.html' %}
+
+</body>
+
+</html>

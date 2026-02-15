@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% include 'includes/admin/head-admin.html' %}
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+
+  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
+    {% include 'includes/admin/aside-admin.html' %}
+  </aside>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      {% include 'includes/admin/nav-admin.html' %}
+    </nav>
+    <!-- End Navbar -->
+
+    {% if company_link.role == "owner"%}
+      <div class="container-fluid py-2">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+
+              <div class="col-xl-6 mb-xl-0 mb-4">
+                
+                <div class="card bg-transparent shadow-xl">
+                  <div class="overflow-hidden position-relative border-radius-xl">
+                    <img src="{{ url_for('static', filename='home/assets/img/logos/bitcoin.jpg')}}" class="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree">
+                    <span class="mask bg-gradient-dark opacity-10"></span>
+                    <div class="card-body position-relative z-index-1 p-3">
+                      <span class="text-white p-2"><img src="{{ url_for('static', filename='home/assets/img/logos/fluxa-w-1.png')}}" alt="bitcoin" width="80px"></span>
+                      <h5 class="text-white mt-4 mb-5 pb-2">{{ company_link.company.name }} {{ company_link.company.legal_structure }}</h5>
+                      <div class="d-flex">
+                        <div class="d-flex">
+                          <div class="me-4">
+                            <p class="text-white text-sm opacity-8 mb-0">Ceo</p>
+                            <h6 class="text-white mb-0">{{ user.name }}</h6>
+                          </div>
+                          <div>
+                            <p class="text-white text-sm opacity-8 mb-0">Point of sale</p>
+                            {% if subscription_plan.name == "Starter" %}
+                              <h6 class="text-white mb-0">{{ points.sale_point }}</h6>
+                            {% elif subscription_plan.name == "Enterprise" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}/15</h6>
+                            {% elif subscription_plan.name == "Corporate" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}</h6>
+                            {% elif subscription_plan.name == "Growth" %}
+                              <h6 class="text-white mb-0">{{ sale_point|lenght }}/5</h6>
+                            {% endif %}
+                          </div>
+                        </div>
+                        <div class="ms-auto w-20 d-flex align-items-end justify-content-end"> 
+                          <img class="w-60 mt-2" src="{{ url_for('static', filename='admin/assets/img/illustrations/rocket-white.png')}}" alt="logo3">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-xl-6">
+                <div class="row">
+
+                  <div class="col-md-6 col-6">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                          <i translate="no" class="material-symbols-rounded opacity-10">account_balance</i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Bilan</h6>
+                        <span class="text-xs">This month</span>
+                        <hr class="horizontal dark my-3">
+
+                        <h5 class="mb-0">
+                          {{ balance_sheet.total_liabilities + balance_sheet.equity}} {{ company_link.company.currency }}
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-6">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                          <i translate="no" class="material-symbols-rounded opacity-10">payments</i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Teasury</h6>
+                        <span class="text-xs">Current month deficits</span>
+                        <hr class="horizontal dark my-3">
+                        <h5 class="mb-0">{{ cash_flow }} {{ company_link.company.currency }}</h5>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-lg-0 mb-4">
+                <div class="card mt-4">
+
+                  <div class="card-header pb-0 p-3">
+                    <div class="row">
+                      <div class="col-6 d-flex align-items-center">
+                        <h6 class="mb-0">Manage Business</h6>
+                      </div>
+                      <div class="col-6 text-end">
+                        <a class="btn bg-gradient-dark mb-0 me-2"
+                          href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#newproductModal"
+                          role="button">
+                          <i class="material-symbols-rounded text-sm">add</i>
+                          Add New Product
+                        </a>
+
+                        <a class="btn bg-gradient-dark mb-0"
+                          href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#newSaleModaladmin"
+                          role="button">
+                          <i class="material-symbols-rounded text-sm">sell</i>
+                          Record Sale
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- SALE PRODUCT MODAL -->
+                  <div class="modal fade" id="newSaleModaladmin" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Record Sale
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addSaleForm" action="{{ url_for('admin_blueprint.add_sale') }}" method="POST">
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-box-seam me-1 text-primary"></i> Product
+                                </label>
+                                <select name="product_id" class="form-select form-select-lg rounded-3 shadow-sm" required>
+                                  {% for p in product_statss %}
+                                    {% if p.stock > 0 %}
+                                      <option value="{{ p.id }}">
+                                        {{ p.name }} (Stock: {{ p.stock }}, Price: {{ p.unit_price }} {{ company_link.company.currency }})
+                                      </option>
+                                    {% endif %}
+                                  {% endfor %}
+                                </select>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-cart-check me-1 text-success"></i> Quantity Sold
+                                </label>
+                                <input type="number" name="quantity" min="1" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter quantity sold" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Record Sale</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW PRODUCT MODAL -->
+                  <div class="modal fade" id="newproductModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Product
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addAdminForm" action="/admin/add-product" method="POST">
+
+                            <div class="col-md-12 mb-3">
+                              <label class="form-label fw-semibold">
+                                <i class="bi bi-geo-alt me-1 text-info"></i> Point of Sale
+                              </label>
+
+                              <select name="company_user_id"
+                                      class="form-select form-select-lg rounded-3 shadow-sm"
+                                      required>
+                                <option value="">Choose point of sale</option>
+
+                                {% for sp in sale_point %}
+                                  <option value="{{ sp.id }}">
+                                    {{ sp.sale_point }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-tag me-1 text-primary"></i> Product Name
+                                </label>
+                                <input type="text" name="product_name" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter product name" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-currency-dollar me-1 text-success"></i> Price
+                                </label>
+                                <input type="number" name="product_price" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter product price" required>
+                              </div>
+                            </div>
+
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-list-check me-1 text-warning"></i> Category
+                                </label>
+                                <select name="product_category" class="form-select form-select-lg rounded-3 shadow-sm" required>
+                                  <option value="">Choose Category</option>
+                                  <option value="Food">Food</option>
+                                  <option value="Electronics">Electronics</option>
+                                  <option value="Clothing">Clothing</option>
+                                  <option value="Cosmetics">Cosmetics</option>
+                                  <option value="Home & Kitchen">Home & Decor</option>
+                                  <option value="Beauty & Health">Wellness & Health</option>
+                                  <option value="Sports & Leisure">Sports & Leisure</option>
+                                  <option value="Toys and Games">Toys and Games</option>
+                                  <option value="Automotive">Automotive</option>
+                                </select>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-stack me-1 text-danger"></i> Quantity
+                                </label>
+                                <input type="number" name="product_quantity" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter product quantity" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Add Product</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body p-3">
+                    <div class="row">
+                      <div class="col-md-4 mb-md-0 mb-4">
+                        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                          <h6 class="mb-0">Add New Expense</h6>
+                          <a href="" class="ms-auto" data-bs-toggle="modal" data-bs-target="#newexpenseModal" role="button">
+                            <i translate="no" class="material-symbols-rounded ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="add expense">add</i>
+                          </a> 
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                          <h6 class="mb-0">Add New Revenue Source</h6>
+                          <a href="" class="ms-auto" data-bs-toggle="modal" data-bs-target="#newrevenueModal" role="button">
+                            <i translate="no" class="material-symbols-rounded ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="add revenue source">add</i>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                          <h6 class="mb-0">Add New Debt</h6>
+                          <a href="" class="ms-auto" data-bs-toggle="modal" data-bs-target="#newdebtModal" role="button">
+                            <i translate="no" class="material-symbols-rounded ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="add debt">add</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW EXPENSE MODAL -->
+                  <div class="modal fade" id="newexpenseModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Expense
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addExpenseForm" action="/admin/add-expense" method="POST">
+                            <div class="row">
+                              <div class="col-md-12 mb-3">
+                                <select name="company_user_id" class="form-select form-select-lg rounded-3 shadow-sm" required>
+                                  {% for cu in sale_point %} 
+                                    <option value="{{ cu.id }}">
+                                      {{ cu.sale_point }}
+                                    </option> 
+                                  {% endfor %} 
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-tag me-1 text-primary"></i> Expense Name
+                                </label>
+                                <input type="text" name="expense_name" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter expense name" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-currency-dollar me-1 text-success"></i> Estimated Cost
+                                </label>
+                                <input type="number" name="expense_cost" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter estimated cost" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Add Expense</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW REVENUE SOURCE MODAL -->
+                  <div class="modal fade" id="newrevenueModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Revenue
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addRevenueForm" action="/admin/add-revenue" method="POST">
+                            <div class="row">
+                              <div class="col-md-12 mb-3">
+                                <div class="mb-3"> 
+                                  <label class="form-label fw-semibold"> 
+                                    <i class="bi bi-shop me-1 text-info"></i> 
+                                    Point of Sale 
+                                  </label> 
+                                  <select name="company_user_id" class="form-select form-select-lg rounded-3 shadow-sm" required> 
+                                    {% for cu in sale_point %} 
+                                    <option value="{{ cu.id }}">
+                                      {{ cu.sale_point }}
+                                    </option> {% endfor %} 
+                                  </select> 
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-tag me-1 text-primary"></i> Source Name
+                                </label>
+                                <input type="text" name="revenue_source" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter revenue source name" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-currency-dollar me-1 text-success"></i> Estimated Amount
+                                </label>
+                                <input type="number" name="revenue_amount" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter estimated amount" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Add Revenue</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW LIABILITIES MODAL -->
+                  <div class="modal fade" id="newdebtModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Liability
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addRevenueForm" action="/admin/add_liability" method="POST">
+                            <div class="form-section" id="liabilities-section"> 
+                              <h3>Liabilities (Debts & Loans)</h3> 
+                              <input class="form-control form-control-lg rounded-3 shadow-sm mb-2" type="text" name="liability_name[]" placeholder="Liability name (e.g. Bank Loan)" required>
+                              <input class="form-control form-control-lg rounded-3 shadow-sm mb-2" type="number" name="liability_value[]" placeholder="Amount" min="0" required> 
+                              <select class="form-select form-select-lg rounded-3 shadow-sm mb-2" name="liability_type[]" class="form-select form-select-lg rounded-3 shadow-sm" required> 
+                                <option value="">Select Type</option> 
+                                <option value="debt">Debt (Supplier)</option> 
+                                <option value="loan">Loan (Bank)</option> 
+                                <option value="other">Other</option> 
+                              </select> 
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Add Liability</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-12 mt-4">
+            <div class="card">
+              <div class="card-header pb-0 px-3">
+                <h6 class="mb-0">Stock Overview</h6>
+              </div>
+              <div class="card-body pt-4 p-3">
+                <ul class="list-group">
+                  {% for p in product_stats %}
+                    <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
+                      <div class="d-flex flex-column">
+                        <h6 class="mb-3 text-sm">{{ p.name }}</h6>
+                        <span class="mb-2 text-xs">Price: <span class="text-dark font-weight-bold ms-sm-2">{{ p.unit_price }} {{ company_link.company.currency }}</span></span>
+                        <span class="mb-2 text-xs">Quantity in stock: 
+                          <span class="text-dark ms-sm-2 font-weight-bold">
+                            {% if p.stock == 0 %} Out of stock {% else %} {{ p.stock }} {% endif %}
+                          </span>
+                        </span>
+                        <span class="text-xs">Sale Point: <span class="text-dark ms-sm-2 font-weight-bold">{{ p.sale_point }}</span></span>
+                      </div>
+                      <div class="ms-auto text-end">
+                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" data-bs-toggle="modal" data-bs-target="#deleteProductModal{{ p.id }}"> <i translate="no" class="material-symbols-rounded text-sm me-2">delete</i>Delete </a>
+                        <a class="btn btn-link text-dark px-3 mb-0"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editProductModal{{ p.id }}">
+                          <i translate="no" class="material-symbols-rounded text-sm me-2">edit</i>
+                          Edit
+                        </a>
+                      </div>
+                    </li>
+                    
+                    <!-- EDIT PRODUCT MODAL -->
+                    <div class="modal fade" id="editProductModal{{ p.id }}" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+
+                          <div class="modal-header bg-gradient-dark">
+                            <h5 class="modal-title text-white">Edit Product</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            <form method="POST" action="{{ url_for('admin_blueprint.edit_product') }}">
+                              <input type="hidden" name="product_id" value="{{ p.id }}">
+
+                              <div class="mb-3">
+                                <label class="form-label">Product Name</label>
+                                <input type="text" name="name" class="form-control" value="{{ p.name }}" required>
+                              </div>
+
+                              <div class="mb-3">
+                                <label class="form-label">Price</label>
+                                <input type="number" step="0.01" name="price" class="form-control" value="{{ p.unit_price }}" required>
+                              </div>
+
+                              <hr>
+
+                              <div class="mb-3">
+                                <label class="form-label">
+                                  Stock adjustment
+                                  <small class="text-muted">(use negative to remove)</small>
+                                </label>
+                                <input type="number" name="stock_adjustment" class="form-control" value="0">
+                              </div>
+
+                              <button type="submit" class="btn bg-gradient-success">
+                                Update
+                              </button>
+                            </form>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- DELETE PRODUCT MODAL -->
+                    <div class="modal fade" id="deleteProductModal{{ p.id }}" tabindex="-1" aria-hidden="true"> 
+                      <div class="modal-dialog modal-dialog-centered"> 
+                        <div class="modal-content"> 
+                          <div class="modal-header bg-gradient-danger"> 
+                            <h5 class="modal-title text-white">Confirm Deletion</h5> 
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button> 
+                          </div> 
+                          <div class="modal-body"> 
+                            <p>Are you sure you want to delete <strong>{{ p.name }}</strong> and all its inventory records?</p>
+                          </div> 
+                          <div class="modal-footer"> 
+                            <form method="POST" action="{{ url_for('admin_blueprint.delete_product') }}"> 
+                              <input type="hidden" name="product_id" value="{{ p.id }}"> 
+                              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button> 
+                              <button type="submit" class="btn btn-danger">Delete</button> 
+                            </form> 
+                          </div> 
+                        </div> 
+                      </div> 
+                    </div>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <footer class="footer py-4  ">
+          {% include 'includes/admin/footer-admin.html' %}
+        </footer>
+
+      </div>
+    {% else %}
+        <div class="container-fluid py-2">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+
+              <div class="col-xl-6 mb-xl-0 mb-4">
+                
+                <div class="card bg-transparent shadow-xl">
+                  <div class="overflow-hidden position-relative border-radius-xl">
+                    <img src="{{ url_for('static', filename='home/assets/img/logos/bitcoin.jpg')}}" class="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree">
+                    <span class="mask bg-gradient-dark opacity-10"></span>
+                    <div class="card-body position-relative z-index-1 p-3">
+                      <span class="text-white p-2"><img src="{{ url_for('static', filename='home/assets/img/logos/fluxa-w-1.png')}}" alt="bitcoin" width="80px"></span>
+                      <h5 class="text-white mt-4 mb-5 pb-2">{{ company_link.company.name }} {{ company_link.company.legal_structure }}</h5>
+                      <div class="d-flex">
+                        <div class="d-flex">
+                          <div class="me-4">
+                            <p class="text-white text-sm opacity-8 mb-0">Manager</p>
+                            <h6 class="text-white mb-0">{{ user.name }}</h6>
+                          </div>
+                          <div>
+                            <p class="text-white text-sm opacity-8 mb-0">Point of sale</p>
+                            <h6 class="text-white mb-0">{{ company_link.sale_point }}</h6>
+                          </div>
+                        </div>
+                        <div class="ms-auto w-20 d-flex align-items-end justify-content-end"> 
+                          <img class="w-60 mt-2" src="{{ url_for('static', filename='admin/assets/img/illustrations/rocket-white.png')}}" alt="logo3">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-xl-6">
+                <div class="row">
+
+                  <div class="col-md-6 col-6">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                          <i translate="no" class="material-symbols-rounded opacity-10">account_balance</i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Bilan</h6>
+                        <span class="text-xs">This month</span>
+                        <hr class="horizontal dark my-3">
+                        <h5 class="mb-0">{{ report_admin.total_liabilities + report_admin.equity}} {{ company_link.company.currency }}</h5>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 col-6">
+                    <div class="card">
+                      <div class="card-header mx-4 p-3 text-center">
+                        <div class="icon icon-shape icon-lg bg-gradient-dark shadow text-center border-radius-lg">
+                          <i translate="no" class="material-symbols-rounded opacity-10">payments</i>
+                        </div>
+                      </div>
+                      <div class="card-body pt-0 p-3 text-center">
+                        <h6 class="text-center mb-0">Teasury</h6>
+                        <span class="text-xs">Current month deficits</span>
+                        <hr class="horizontal dark my-3">
+                        <h5 class="mb-0">{{ cash_flow_admin }} {{ company_link.company.currency }}</h5>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-lg-0 mb-4">
+                <div class="card mt-4">
+
+                  <div class="card-header pb-0 p-3">
+                    <div class="row">
+                      <div class="col-6 d-flex align-items-center">
+                        <h6 class="mb-0">Enter Your Activities</h6>
+                      </div>
+                      <div class="col-6 text-end p-3">
+                        <a class="btn bg-gradient-dark mb-0" href=""
+                          data-bs-toggle="modal"
+                          data-bs-target="#newSaleModal"
+                          role="button"><i translate="no" class="material-symbols-rounded text-sm">sell</i>&nbsp;&nbsp;Record Sale</a>
+                      </div> <br>
+                    </div>
+                  </div>
+
+                  <!-- SALE PRODUCT MODAL -->
+                  <div class="modal fade" id="newSaleModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Record Sale
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addSaleForm" action="{{ url_for('admin_blueprint.add_sale') }}" method="POST">
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-box-seam me-1 text-primary"></i> Product
+                                </label>
+                                <select name="product_id" class="form-select form-select-lg rounded-3 shadow-sm" required>
+                                  {% for p in product_statss %}
+                                    {% if p.stock > 0 %}
+                                      <option value="{{ p.id }}">
+                                        {{ p.name }} (Stock: {{ p.stock }}, Price: {{ p.unit_price }} {{ company_link.company.currency }})
+                                      </option>
+                                    {% endif %}
+                                  {% endfor %}
+                                </select>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-cart-check me-1 text-success"></i> Quantity Sold
+                                </label>
+                                <input type="number" name="quantity" min="1" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter quantity sold" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Record Sale</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-body p-3">
+                    <div class="row">
+                      <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                          <h6 class="mb-0">Add New Expense</h6>
+                          <a href="" class="ms-auto" data-bs-toggle="modal" data-bs-target="#newexpensesModal" role="button">
+                            <i translate="no" class="material-symbols-rounded ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="add expense">add</i>
+                          </a> 
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                          <h6 class="mb-0">Declare Revenue</h6>
+                          <a href="" class="ms-auto" data-bs-toggle="modal" data-bs-target="#declareRevenueModal" role="button">
+                            <i translate="no" class="material-symbols-rounded ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="add revenue source">add</i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW EXPENSE MODAL -->
+                  <div class="modal fade" id="newexpensesModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Expense
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4"> 
+                          <form id="addExpenseForm" action="{{ url_for('admin_blueprint.add_expenses') }}" method="POST">
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-tag me-1 text-primary"></i> Expense Name
+                                </label>
+                                <input type="text" name="expense_name" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter expense name" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-currency-dollar me-1 text-success"></i> Cost
+                                </label>
+                                <input type="number" step="0.01" name="expense_cost" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter cost" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success px-4 rounded-pill shadow-sm">Add Expense</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- NEW REVENUE SOURCE MODAL -->
+                  <div class="modal fade" id="declareRevenueModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content shadow-lg border-0 rounded-4">
+
+                        <!-- HEADER -->
+                        <div class="modal-header bg-gradient-dark text-white rounded-top-4">
+                          <h5 class="modal-title fw-bold">
+                            <i class="bi bi-box-seam me-2"></i> Add New Revenue
+                          </h5>
+                          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body p-4">
+                          <form id="addRevenueForm" action="{{ url_for('admin_blueprint.add_revenues') }}" method="POST">
+                            <div class="row">
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-tag me-1 text-primary"></i> Source Name
+                                </label>
+                                <input type="text" name="revenue_source" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter revenue source name" required>
+                              </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">
+                                  <i class="bi bi-currency-dollar me-1 text-success"></i> Amount
+                                </label>
+                                <input type="number" step="0.01" name="revenue_amount" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter amount" required>
+                              </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Add Revenue</button>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          
+          <div class="col-md-12 mt-4">
+            <div class="card h-100 mb-4">
+              <div class="card-header pb-0 px-3">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6 class="mb-0">Your Transactions</h6>
+                  </div>
+                  <div class="col-md-6 d-flex justify-content-start justify-content-md-end align-items-center">
+                    <i translate="no" class="material-symbols-rounded me-2 text-lg">date_range</i>
+                    <small>{{ transactions[0].created_at.strftime("%d %B %Y") if transactions else "" }}</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body pt-4 p-3">
+                <h6 class="text-uppercase text-body text-xs font-weight-bolder mb-3">Newest</h6>
+                <ul class="list-group">
+                  {% for t in transactions %}
+                  <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                    <div class="d-flex align-items-center">
+                      {% if t.action_type == "sale" %}
+                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
+                          <i translate="no" class="material-symbols-rounded text-lg">expand_less</i>
+                        </button>
+                      {% elif t.action_type == "expense" %}
+                        <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
+                          <i translate="no" class="material-symbols-rounded text-lg">expand_more</i>
+                        </button>
+                      {% else %}
+                        <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-3 p-3 btn-sm d-flex align-items-center justify-content-center">
+                          <i translate="no" class="material-symbols-rounded text-lg">priority_high</i>
+                        </button>
+                      {% endif %}
+
+                      <div class="d-flex flex-column">
+                        <h6 class="mb-1 text-dark text-sm">{{ t.entity }}</h6>
+                        <span class="text-xs">{{ t.created_at.strftime("%d %B %Y, at %H:%M") }}</span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex align-items-center 
+                      {% if t.action_type == 'sale' %} text-success text-gradient 
+                      {% elif t.action_type == 'expense' %} text-danger text-gradient 
+                      {% else %} text-dark {% endif %} 
+                      text-sm font-weight-bold">
+                      {% if t.action_type == "sale" %}
+                        + {{ t.impact_value }} {{ t.impact_unit }}
+                      {% elif t.action_type == "expense" %}
+                        - {{ t.impact_value }} {{ company_link.company.currency }}
+                      {% else %}
+                        {{ t.status }}
+                      {% endif %}
+                    </div>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <footer class="footer py-4  ">
+          {% include 'includes/admin/footer-admin.html' %}
+        </footer>
+
+      </div>
+    {% endif %}
+
+  </main>
+
+  <!--   Core JS Files   -->
+  {% include 'includes/admin/script-admin.html' %}
+
+</body>
+
+</html>
