@@ -78,8 +78,8 @@ def create_app(config="app.config.Config"):
 
         admin_user = User(
             email=ADMIN_EMAIL,
-            name="Chrinovic",
-            family_name="Nyembo",
+            name="Super",
+            family_name="Admin",
             password_hash=hashed_password,
             auth_provider="local",
             is_active=True
