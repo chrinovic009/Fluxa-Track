@@ -74,7 +74,7 @@ def create_app(config="app.config.Config"):
         if existing_user:
             return False  # L'admin existe déjà
 
-        hashed_password = bcrypt.generate_password_hash(ADMIN_PASSWORD)
+        hashed_password = bcrypt.generate_password_hash(ADMIN_PASSWORD).decode('utf-8')
 
         admin_user = User(
             email=ADMIN_EMAIL,
