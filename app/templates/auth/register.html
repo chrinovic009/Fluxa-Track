@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <title>Fluxa – Login</title>
+        <title>Fluxa – Register</title>
         <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='home/assets/img/logos/logo-r.png')}}">
@@ -46,7 +46,7 @@
             <span>or</span>
         </div>
 
-        <form action="{{ url_for('auth_blueprint.login') }}" method="POST">
+        <form action="{{ url_for('auth_blueprint.register') }}" method="POST">
             <div class="input-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Enter your email" required />
@@ -58,9 +58,13 @@
                 <span class="toggle-password" id="togglePassword">👁</span>
             </div>
 
-            <a href="{{ url_for('auth_blueprint.register') }}" class="register">Register</a>
+            <div class="input-group password-group">
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password" required />
+                <span class="toggle-password" id="toggleConfirmPassword">👁</span>
+            </div>
 
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" class="login-btn">Register</button>
         </form>
 
     </div>

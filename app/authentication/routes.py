@@ -51,23 +51,27 @@ def login():
 
 @blueprint.route("/google_login")
 def google_login():
-    # Si l'utilisateur n'est pas encore autorisé par Google → redirection vers Google
-    if not google.authorized:
-        return redirect(url_for("google.login"))
+    try: 
+        # Si l'utilisateur n'est pas encore autorisé par Google → redirection vers Google
+        if not google.authorized:
+            return redirect(url_for("google.login"))
 
-    # Récupération des infos Google
-    resp = google.get("/oauth2/v2/userinfo")
-    if not resp.ok:
-        abort(401)
+        # Récupération des infos Google
+        resp = google.get("/oauth2/v2/userinfo")
+        if not resp.ok:
+            return redirect(url_for("auth_blueprint.login", google_error=1))
 
-    user_info = resp.json()
-    email = user_info.get("email")
-    name = user_info.get("given_name") or user_info.get("name")
-    family_name = user_info.get("family_name")
-    google_id = user_info.get("id")
+        user_info = resp.json()
+        email = user_info.get("email")
+        name = user_info.get("given_name") or user_info.get("name")
+        family_name = user_info.get("family_name")
+        google_id = user_info.get("id")
 
-    if not email or not google_id:
-        abort(400)
+        if not email or not google_id:
+            return redirect(url_for("auth_blueprint.login", google_error=1))
+    except Exception as e:
+        print(f"Google login error: {e}")
+        return redirect(url_for("auth_blueprint.login", google_error=1))
 
     # Vérifie si l'utilisateur existe déjà
     user = User.query.filter_by(email=email).first()
@@ -115,6 +119,43 @@ def google_login():
     # Connecte l'utilisateur
     login_user(user)
     return redirect(url_for("home_blueprint.home"))
+
+# pour la page d'inscription
+@blueprint.route("/register", methods=["GET", "POST"])
+@csrf.exempt
+def register():
+
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        if password != confirm_password:
+            flash("Passwords do not match", "danger")
+            return redirect(url_for("auth_blueprint.register"))
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email already registered", "danger")
+            return redirect(url_for("auth_blueprint.register"))
+
+        password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
+
+        user = User(
+            email=email,
+            password_hash=password_hash,
+            auth_provider="local",
+            is_active=True
+        )
+
+        db.session.add(user)
+        db.session.commit()
+
+        login_user(user)
+
+        return redirect(url_for("home_blueprint.home"))
+
+    return render_template("auth/register.html", page_active="register")
 
 # pour la page de création d'entreprise
 @blueprint.route('/business', methods=["GET", "POST"])
